@@ -1,0 +1,87 @@
+/* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Center the Form Container */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Form Heading */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* General Form Field Group */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Label Styling */
+label {
+    font-weight: bold;
+    color: #333;
+    display: block; /* Make label a block element for better structure */
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+/* Input, Select, Textarea Styling */
+input, select, textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box; /* Ensure padding doesn't overflow */
+}
+
+/* File Input Styling */
+input[type="file"] {
+    padding: 5px;
+    font-size: 14px;
+}
+
+/* Button Styling */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 15px;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    form {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    input, select, textarea, button {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/navstyles.css' %}">
+</head>
+<body>
+    <!-- Fixed Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <!-- Logo (small logo aligned left) -->
+            <div class="navbar-logo">
+                <img src="{% static 'images/logo.jpg' %}" alt="Logo" width="30" height="30">
+            </div>
+
+            <!-- Navbar Links -->
+            <div class="navbar-links">
+                <a href="{% url 'addproduct' %}" class="navbar-link">Add Product</a>
+                <a href="{% url 'listprod' %}" class="navbar-link">Product</a>
+
+                {% if user.is_authenticated %}
+                    <!-- Display username and logout button when user is logged in -->
+                    <span class="navbar-link">Welcome, {{ user.username }}</span>
+                    <a href="{% url 'login' %}" class="navbar-link">Logout</a>
+                {% else %}
+                    <!-- Display login button when user is not logged in -->
+                    <a href="{% url 'login' %}" class="navbar-link">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content section -->
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>

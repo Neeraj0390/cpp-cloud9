@@ -1,0 +1,59 @@
+{% extends "product/base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>Product List</h1>
+    
+    <!-- Search Bar -->
+    <form method="GET" class="search-bar">
+        <input type="text" name="search_term" value="{{ search_term }}" placeholder="Search for products...">
+        <button type="submit">Search</button>
+    </form>
+    
+    <div class="product-container">
+        {% for prod in product %}
+        <div class="product-card">
+            <img src="{{ prod.product_image.url }}" alt="{{ prod.product_name }}" class="product-image">
+            <div class="product-details">
+                <h2>{{ prod.product_name }}</h2>
+                <p><strong>Type:</strong> {{ prod.product_type }}</p>
+                <p><strong>Price:</strong> ${{ prod.selling_price }}</p>
+                <p><strong>Quantity:</strong> {{ prod.total_quantity }}</p>
+            </div>
+            
+            <div class="product-actions">
+                {% if user.is_staff %}
+                    <!-- Admin buttons: Update and Delete -->
+                    <a href="{% url 'updproduct' prod.id %}" class="update-btn">Update</a>
+                    
+                    <form method="POST" action="{% url 'delproduct' prod.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                {% else %}
+                    <!-- Regular user button: Sell -->
+                    {% if prod.total_quantity > 0 %}
+                        <form method="POST" action="{% url 'list_regular_products' %}" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ prod.id }}">
+                            <button type="submit" name="sell_button" class="sell-btn">Sell</button>
+                        </form>
+                    {% else %}
+                        <span>Out of stock</span>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,112 @@
+{% extends "product/base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+
+    {% load static %}
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet"  href="{% static 'css/customs-styles.css' %}">
+</head>
+<body>
+    <h1>Add a New Product</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Render the form fields dynamically (using Django form rendering) -->
+
+        <div class="form-group">
+            <label for="{{ form.product_name.id_for_label }}">Product Name</label>
+            {{ form.product_name }}
+            {% if form.product_name.errors %}
+                <div class="error">
+                    {% for error in form.product_name.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.total_quantity.id_for_label }}">Total Quantity</label>
+            {{ form.total_quantity }}
+            {% if form.total_quantity.errors %}
+                <div class="error">
+                    {% for error in form.total_quantity.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.product_type.id_for_label }}">Product Type</label>
+            {{ form.product_type }}
+            {% if form.product_type.errors %}
+                <div class="error">
+                    {% for error in form.product_type.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+
+
+        <div class="form-group">
+            <label for="{{ form.product_image.id_for_label }}">Product Image</label>
+            {{ form.product_image }}
+            {% if form.product_image.errors %}
+                <div class="error">
+                    {% for error in form.product_image.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.quantity_sold.id_for_label }}">Quantity Sold</label>
+            {{ form.quantity_sold }}
+            {% if form.quantity_sold.errors %}
+                <div class="error">
+                    {% for error in form.quantity_sold.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.selling_price.id_for_label }}">Selling Price</label>
+            {{ form.selling_price }}
+            {% if form.selling_price.errors %}
+                <div class="error">
+                    {% for error in form.selling_price.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.buying_price.id_for_label }}">Buying Price</label>
+            {{ form.buying_price }}
+            {% if form.buying_price.errors %}
+                <div class="error">
+                    {% for error in form.buying_price.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <button type="submit">Add Product</button>
+    </form>
+</body>
+</html>
+{% endblock content %}

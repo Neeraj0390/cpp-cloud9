@@ -1,0 +1,54 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0; /* Remove left: 20px */
+    right: 0; /* Remove right: 20px */
+    width: 100%; /* Set to 100% to span the entire width */
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    z-index: 1000; /* Ensure the navbar is always on top */
+    box-sizing: border-box; /* Ensure padding does not affect the width */
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-logo img {
+    height: 30px;
+    width: 30px;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 5px 10px;
+}
+
+.navbar-link:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+/* Main content section */
+.content {
+    margin-top: 60px; /* To avoid the content being hidden behind the fixed navbar */
+    padding: 20px;
+}
