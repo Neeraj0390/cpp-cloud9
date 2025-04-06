@@ -123,6 +123,46 @@ def list_regular_products(request):
     }
 
     return render(request, "product/home.html", context)
+# views.py (at the bottom)
+
+from django.contrib.auth.views import LoginView, LogoutView
+import boto3
+import logging
+
+logger = logging.getLogger(__name__)
+
+class CustomLoginView(LoginView):
+    template_name = 'product/login.html'  # your existing template
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        try:
+            sns = boto3.client('sns', region_name='eu-west-1')  # change region if needed
+            sns.publish(
+                TopicArn='arn:aws:sns:eu-west-1:250738637992:login-notifications',
+                Subject='User Login Notification',
+                Message=f'User {self.request.user.username} has logged in.'
+            )
+        except Exception as e:
+            logger.error(f'Failed to send login SNS notification: {e}')
+        return response
+
+
+class CustomLogoutView(LogoutView):
+    next_page = 'login'  # Redirect here after logout
+
+    def dispatch(self, request, *args, **kwargs):
+        username = request.user.username if request.user.is_authenticated else 'Anonymous'
+        try:
+            sns = boto3.client('sns', region_name='eu-west-1')
+            sns.publish(
+                TopicArn='arn:aws:sns:eu-west-1:250738637992:login-notifications',
+                Subject='User Logout Notification',
+                Message=f'User {username} has logged out.'
+            )
+        except Exception as e:
+            logger.error(f'Failed to send logout SNS notification: {e}')
+        return super().dispatch(request, *args, **kwargs)
 
 
        

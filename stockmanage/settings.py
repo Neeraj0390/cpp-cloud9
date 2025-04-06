@@ -169,4 +169,4 @@ MEDIA_URL = '/media/'
 
 # stockmanage/settings.py
 AWS_REGION = 'eu-west-1'
-SNS_TOPIC_ARN = 'arn:aws:sns:eu-west-1:022499013177:login-notifications'  # Replace with your ARN
+SNS_TOPIC_ARN = 'arn:aws:sns:eu-west-1:250738637992:login-notifications'
