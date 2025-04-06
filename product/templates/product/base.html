@@ -18,7 +18,9 @@
 
             <!-- Navbar Links -->
             <div class="navbar-links">
-                <a href="{% url 'addproduct' %}" class="navbar-link">Add Product</a>
+                {% if user.is_staff %}
+                    <a href="{% url 'addproduct' %}" class="navbar-link">Add Product</a>
+                {% endif %}
                 <a href="{% url 'listprod' %}" class="navbar-link">Product</a>
 
                 {% if user.is_authenticated %}
@@ -38,6 +40,5 @@
         {% block content %}
         {% endblock %}
     </div>
-
 </body>
 </html>
